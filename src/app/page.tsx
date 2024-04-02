@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <h1>Home</h1>
       <Link
-        href="/admin"
+        href="dashboard/admin"
         className="text-blue-500 hover:underline"
       >
         Go to Admin

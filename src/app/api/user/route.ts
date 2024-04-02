@@ -1,8 +1,22 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server"
-import { hash } from "bcrypt";
 
+export async function GET(req: Request){
+    try{
+        const users = await prisma.user.findMany({
+            select: {
+                id: true,
+                email: true,
+                username: true
+            }
+        });
 
+        return NextResponse.json({ users });
+    } catch (error){
+        console.error(error);
+        return NextResponse.json({ message: "Erro ao buscar usuários" }, { status: 500 });
+    }
+}
 
 export async function POST(req: Request){
     try{
@@ -32,13 +46,12 @@ export async function POST(req: Request){
                 message: 'Username já cadastrado'
             }, { status: 409 });
         }
-        const hashedPassword = await hash(password, 10);
 
         const newUser = await prisma.user.create({
             data: {
                 email,
                 username,
-                password: hashedPassword
+                password
             }
         });
 
