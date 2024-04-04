@@ -35,7 +35,7 @@ export default async function ListLogs(){
             <>
                 <div key={log.id} className="border-b border-gray-100 py-2 text-center">
                     <div>
-                        <div className="text-lg font-semibold">A temperatura estava em {(new String(log.grausTemp))}°C em: {(new Date(log.horarioTempetura).toLocaleString("pt-BR"))}</div>
+                        <div className="text-lg font-semibold">A temperatura estava em {(new String(log.grausTemp))}°C em: {(new Date(log.horarioTemperatura).toLocaleString("pt-BR"))}</div>
                     </div>
                     <div>
                         <div className="text-sm text-gray-500">Aerador foi ligado a última vez: {(new Date(log.horarioAerador).toLocaleString("pt-BR"))}</div>
@@ -50,7 +50,7 @@ export default async function ListLogs(){
         <div>
             {logComponent}
             <div className="text-center p-5">
-                <Link href="/dashboard/logs" className="text-md text-blue-400 hover:underline">
+                <Link href="/dashboard/admin" className="text-md text-blue-400 hover:underline">
                     Voltar ⬅
                 </Link>
             </div>

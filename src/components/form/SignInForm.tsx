@@ -14,7 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const FormSchema = z.object({
@@ -41,10 +41,12 @@ const SignInForm = () => {
       password: values.password,
     });
 
-    if(signInData?.error) {
-      console.error(signInData.error)
-    } else {
-      router.push('/dashboard')
+    if(signInData){
+      if(signInData?.ok){
+        router.push('/dashboard/admin');
+      } else{
+        console.error('Failed to sign in', signInData?.error);
+      }
     }
   };
 
@@ -92,7 +94,7 @@ const SignInForm = () => {
       </div>
       <p className='text-center text-sm text-gray-600 mt-2 '>
         Se você ainda não tiver uma conta, por favor{' '}
-        <Link className='text-blue-500 hover:underline' href='/sign-up'>
+        <Link className='text-blue-500 hover:underline' href='/auth/sign-up'>
            cadastre-se!
         </Link>
       </p>

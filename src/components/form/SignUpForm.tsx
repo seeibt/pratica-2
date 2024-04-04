@@ -57,7 +57,7 @@ const SignUpForm = () => {
     });
 
     if(response.ok) {
-      router.push('/sign-in');
+      router.push('/auth/sign-in');
     } else {
       const data = await response.json();
       alert(data.message);
@@ -137,7 +137,7 @@ const SignUpForm = () => {
       </form>
       <p className='text-center text-sm text-gray-600 mt-2'>
         Se você já tem uma conta, por favor{' '}
-        <Link className='text-blue-500 hover:underline' href='/sign-in'>
+        <Link className='text-blue-500 hover:underline' href='/auth/sign-in'>
           faça login.
         </Link>
       </p>
