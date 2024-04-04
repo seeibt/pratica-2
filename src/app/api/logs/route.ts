@@ -12,7 +12,7 @@ export async function GET(req: Request){
         return NextResponse.json({ logs });
     } catch (error){
         console.error(error);
-        return NextResponse.json({ message: "Erro ao buscar logs" }, { status: 500 });
+        return NextResponse.json({ message: "Erro ao buscar logs!" }, { status: 500 });
     }
 }
 
