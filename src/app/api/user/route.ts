@@ -21,11 +21,10 @@ export async function GET(req: Request){
 export async function POST(req: Request){
     try{
         const body = await req.json();
-        const { email, username, password } = body;
 
         //checar se o email existe
         const existingUserByEmail = await prisma.user.findUnique({
-            where: { email }
+            where: { email: body.email }
         });
 
         if(existingUserByEmail){
@@ -37,7 +36,7 @@ export async function POST(req: Request){
 
         //checar se o username existe
         const existingUserByUsername = await prisma.user.findUnique({
-            where: { username }
+            where: { username: body.username }
         });
 
         if(existingUserByUsername){
@@ -49,9 +48,9 @@ export async function POST(req: Request){
 
         const newUser = await prisma.user.create({
             data: {
-                email,
-                username,
-                password
+                email: body.email,
+                username: body.username,
+                password: body.password
             }
         });
 
