@@ -1,35 +1,29 @@
 import { Logs } from "@prisma/client"
 import Link from "next/link"
 
-// const getLogs = async () => {
-//     const apiUrl = process.env.API_URL
+const getLogs = async () => {
+    const apiUrl = process.env.API_URL
 
-//     try{
-//         const res = await fetch(`${apiUrl}/api/logs`, {
-//             cache: 'no-store',
-//         })
+    try{
+        const res = await fetch(`${apiUrl}/api/logs`, {
+            cache: 'no-store',
+        })
 
-//         if(!res.ok){
-//             throw new Error('Failed to fetch logs')
-//         }
+        if(!res.ok){
+            throw new Error('Failed to fetch logs')
+        }
 
-//         return res.json()
+        return res.json()
 
-//     } catch(err){
-//         console.log(err)
-//     }
-// }
-
-
+    } catch(err){
+        console.log(err)
+    }
+}
 
 export default async function ListLogs(){
 
-    // let logs = await getLogs()
-    let logs = {
-        logs: [
-            
-        ]
-    }
+    let logs = await getLogs()
+    
 
     if(!logs){
         return <div className="text-center">Nenhum registro encontrado...</div>
