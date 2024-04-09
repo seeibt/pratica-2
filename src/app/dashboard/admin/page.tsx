@@ -31,33 +31,37 @@ const Admin =  async () => {
   if(!session?.user){
     return ( 
       <>
-        <h2 className='text-center text-red-500'>Acesso Negado, você precisa estar logado para acessar essa página!</h2>
-        <Link href="/dashboard" className="text-blue-500 hover:underline p-5">
-          Voltar
-        </Link>
+        <div className='flex justify-center items-center flex-col h-full'>
+          <h2 className='text-center text-red-500'>Acesso Negado, você precisa estar logado para acessar essa página!</h2>
+          <Link href="/dashboard" className="text-blue-500 hover:underline p-5">
+            Voltar
+          </Link>
+        </div>
       </>
     )
   }
 
   if(!logs || !logs.logs || logs.logs.length === 0){
-      return <div className="text-center">Nenhum registro encontrado...</div>
+      return <div className="flex justify-center items-center flex-col h-full">Nenhum registro encontrado...</div>
   }
     
   const firstLog = logs.logs[0];
 
   return  (
     <>
-      <div className='w-full text-center text-sm'>
-        <div className='text-lg'>
-          <h1>Bem vindo de volta, <b>{session?.user.username}!</b></h1>
-        </div>
-        <p>A temperatura da água no momento está em {firstLog.grausTemp} ºC</p>
-        <p>Última vez que o Aerador foi ligado: {new Date(firstLog.horarioAerador).toLocaleString('pt-BR')}</p>
-        <p>Última vez que o Tratador foi ligado: {new Date(firstLog.horarioTratador).toLocaleString('pt-BR')}</p>
-        <div className="text-center p-5">
-            <Link href="/dashboard/listarLogs" className="text-md text-blue-400 hover:underline">
-                Conferir todos os registros ➡
-            </Link>
+      <div className='flex justify-center items-center flex-col h-full'>
+        <div className='w-full text-center text-sm'>
+          <div className='text-lg'>
+            <h1>Bem vindo de volta, <b>{session?.user.username}!</b></h1>
+          </div>
+          <p>A temperatura da água no momento está em {firstLog.grausTemp} ºC</p>
+          <p>Última vez que o Aerador foi ligado: {new Date(new Date(firstLog.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString('pt-BR')}</p>
+          <p>Última vez que o Tratador foi ligado: {new Date(new Date(firstLog.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString('pt-BR')}</p>
+          <div className="text-center p-5">
+              <Link href="/dashboard/listarLogs" className="text-md text-blue-400 hover:underline">
+                  Conferir todos os registros ➡
+              </Link>
+          </div>
         </div>
       </div>
     </>

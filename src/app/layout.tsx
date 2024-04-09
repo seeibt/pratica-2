@@ -17,15 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <main className='h-screen flex flex-col justify-center items-center'>
-          <NextAuthProvider>
-            <Navbar />
+    <html lang='pt-br' className="h-full">
+      <body className={`${inter.className} h-full`}>
+        <NextAuthProvider>
+          <Navbar />
+          <main className='flex flex-col justify-center items-center min-h-screen mt-[navbar-height]'>
             {children}
-          </NextAuthProvider>
-        </main>
+          </main>
+        </NextAuthProvider>
       </body>
     </html>
-  );
+  );  
 }
