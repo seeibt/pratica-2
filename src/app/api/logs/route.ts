@@ -28,10 +28,10 @@ export async function POST(req: Request){
 
         const log = await prisma.logs.create({
             data: {
-                horarioTemperatura: ((horarioTemperatura) > 0 ? new Date().toISOString() : lastLog?.horarioTemperatura) as Date,
+                horarioTemperatura: ((horarioTemperatura) > 0 ? new Date(new Date().toLocaleDateString("pt-BR")).toISOString() : lastLog?.horarioTemperatura) as Date,
                 grausTemp,
-                horarioAerador: ((horarioAerador) > 0 ? new Date().toISOString() : lastLog?.horarioAerador) as Date,
-                horarioTratador: ((horarioTratador) > 0 ? new Date().toISOString() : lastLog?.horarioTratador) as Date,
+                horarioAerador: ((horarioAerador) > 0 ? new Date(new Date().toLocaleDateString("pt-BR")).toISOString() : lastLog?.horarioAerador) as Date,
+                horarioTratador: ((horarioTratador) > 0 ? new Date(new Date().toLocaleDateString("pt-BR")).toISOString() : lastLog?.horarioTratador) as Date,
             },
         });
 
