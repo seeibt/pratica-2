@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Home() {
   return(
-    <div>
+    <div className="block text-center h-full">
       <h1>Home</h1>
       <Link
         href="dashboard/admin"
