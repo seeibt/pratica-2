@@ -39,6 +39,7 @@ const SignInForm = () => {
     const signInData = await signIn('credentials', {
       email: values.email,
       password: values.password,
+      callbackUrl: '/dashboard/admin',
     });
 
     if(signInData){
