@@ -34,8 +34,8 @@ export default async function ListLogs() {
                     <div className="text-lg font-semibold">A temperatura estava em {log?.grausTemp != null ? log.grausTemp.toString() : ''}°C em: {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</div>
                 </div>
                 <div>
-                    <div className="text-sm text-gray-500">Aerador foi ligado a última vez: {log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</div>
-                    <div className="text-sm text-gray-500">Tratador foi ligado a última vez: {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</div>
+                    <div className="text-sm text-gray-500">Aerador foi ligado a última vez: <b>{log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</b></div>
+                    <div className="text-sm text-gray-500">Tratador foi ligado a última vez: <b> {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</b></div>
                 </div>
             </div>
         );
