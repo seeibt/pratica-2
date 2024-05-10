@@ -50,10 +50,10 @@ const Admin =  async () => {
   return  (
     <>
       <div className='flex justify-center items-center flex-col h-full'>
-        <div className='w-full text-center text-sm'>
-          <div className='text-lg'>
+        <div className='text-2xl'>
             <h1>Bem vindo de volta, <b>{session?.user.username}!</b></h1>
           </div>
+        <div className='w-full text-center text-xl'>
           <p>A temperatura da água no momento está em {firstLog.grausTemp} ºC</p>
           <p>Última vez que o Aerador foi ligado: {new Date(new Date(firstLog.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString('pt-BR')}</p>
           <p>Última vez que o Tratador foi ligado: {new Date(new Date(firstLog.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString('pt-BR')}</p>
