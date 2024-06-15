@@ -30,35 +30,43 @@ export default async function ListLogs() {
 
         return (
             <>
-                <div className="mt-16">
-                    <table className="min-w-full divide-y divide-gray-200">
-                        <thead>
-                            <tr>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Temperatura</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário da Temperatura</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Último Registro do Aerador</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Último Registro do Tratador</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                            {logs.logs.map((log: Logs) => (
-                                <tr key={log.id}>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.grausTemp != null ? log.grausTemp.toString() : ''}°C
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                <div className="mt-16 px-4 sm:px-6 lg:px-8">
+                    <div className="flex flex-col">
+                        <div className="overflow-x-auto">
+                            <div className="inline-block min-w-full align-middle">
+                                <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+                                    <table className="min-w-full divide-y divide-gray-200">
+                                        <thead className="bg-gray-50">
+                                            <tr>
+                                                <th className="px-2 sm:px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Temperatura</th>
+                                                <th className="px-2 sm:px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário da Temperatura</th>
+                                                <th className="px-2 sm:px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Último Registro do Aerador</th>
+                                                <th className="px-2 sm:px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Último Registro do Tratador</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="bg-white divide-y divide-gray-200">
+                                            {logs.logs.map((log: Logs) => (
+                                                <tr key={log.id}>
+                                                    <td className="px-2 sm:px-4 py-4 text-sm text-gray-900">
+                                                        {log?.grausTemp != null ? log.grausTemp.toString() : ''}°C
+                                                    </td>
+                                                    <td className="px-2 sm:px-4 py-4 text-sm text-gray-900">
+                                                        {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
+                                                    </td>
+                                                    <td className="px-2 sm:px-4 py-4 text-sm text-gray-900">
+                                                        {log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
+                                                    </td>
+                                                    <td className="px-2 sm:px-4 py-4 text-sm text-gray-900">
+                                                        {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div className="text-center p-5">
                         <Link href="/dashboard/admin" className="text-md text-blue-400 hover:underline">
                             Voltar ⬅
