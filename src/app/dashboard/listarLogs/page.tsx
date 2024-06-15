@@ -1,56 +1,74 @@
-import { Logs } from "@prisma/client"
-import Link from "next/link"
+import { Logs } from "@prisma/client";
+import Link from "next/link";
 
 const getLogs = async () => {
-    const apiUrl = process.env.API_URL
+    const apiUrl = process.env.API_URL;
 
     try {
         const res = await fetch(`${apiUrl}/api/logs`, {
             cache: 'no-store',
-        })
+        });
 
         if (!res.ok) {
-            throw new Error('Failed to fetch logs')
+            throw new Error('Failed to fetch logs');
         }
 
-        return res.json()
-
+        return res.json();
     } catch (err) {
-        console.log(err)
+        console.error('Error fetching logs:', err);
+        return null; // or [] or any appropriate default value
     }
-}
+};
 
 export default async function ListLogs() {
-    let logs = await getLogs();
+    try {
+        const logs = await getLogs();
 
-    if (!logs) {
-        return <div className="text-center mt-[navbar-height]">Nenhum registro encontrado...</div>;
-    }
+        if (!logs || !logs.logs) {
+            return <div className="text-center mt-[navbar-height]">Nenhum registro encontrado...</div>;
+        }
 
-    const logComponent = logs.logs.map((log: Logs) => {
         return (
-            <div key={log.id} className="border-b border-gray-100 py-2 text-center">
-                <div>
-                    <div className="text-lg font-semibold">A temperatura estava em {log?.grausTemp != null ? log.grausTemp.toString() : ''}°C em: {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</div>
+            <>
+                <div className="mt-16">
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Temperatura</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horário da Temperatura</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Último Registro do Aerador</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Último Registro do Tratador</th>
+                            </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                            {logs.logs.map((log: Logs) => (
+                                <tr key={log.id}>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {log?.grausTemp != null ? log.grausTemp.toString() : ''}°C
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime()).toLocaleString("pt-BR") : ''}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime()).toLocaleString("pt-BR") : ''}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime()).toLocaleString("pt-BR") : ''}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="text-center p-5">
+                        <Link href="/dashboard/admin" className="text-md text-blue-400 hover:underline">
+                            Voltar ⬅
+                        </Link>
+                    </div>
                 </div>
-                <div>
-                    <div className="text-sm text-gray-500">Aerador foi ligado a última vez: <b>{log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</b></div>
-                    <div className="text-sm text-gray-500">Tratador foi ligado a última vez: <b> {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}</b></div>
-                </div>
-            </div>
+            </>
         );
-    });
-
-    return (
-        <>
-            <div className="mt-16">
-                {logComponent}
-                <div className="text-center p-5">
-                    <Link href="/dashboard/admin" className="text-md text-blue-400 hover:underline">
-                        Voltar ⬅
-                    </Link>
-                </div>
-            </div>
-        </>
-    );
+    } catch (error) {
+        console.error('Error rendering logs:', error);
+        return <div className="text-center mt-[navbar-height]">Erro ao carregar registros...</div>;
+    }
 }

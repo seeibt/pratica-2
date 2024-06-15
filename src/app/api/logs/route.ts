@@ -1,18 +1,19 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server"
 
-export async function GET(req: Request){
-    try{
+export async function GET(req: Request) {
+    try {
         const logs = await prisma.logs.findMany({
             orderBy: {
-                horarioTemperatura: "desc",
+                horarioTemperatura: 'desc',
             },
+            take: 50,
         });
 
         return NextResponse.json({ logs });
-    } catch (error){
+    } catch (error) {
         console.error(error);
-        return NextResponse.json({ message: "Erro ao buscar logs!" }, { status: 500 });
+        return NextResponse.json({ message: 'Erro ao buscar logs!' }, { status: 500 });
     }
 }
 

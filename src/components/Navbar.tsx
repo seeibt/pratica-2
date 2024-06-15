@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import { Button, buttonVariants } from './ui/button';
-import { HandMetal } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { FaHome } from "react-icons/fa";
 import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
@@ -15,17 +15,17 @@ const Navbar = () => {
       <div className='container flex items-center justify-between'>
         <div>
           <Link href='/'>
-            <HandMetal />
+            <FaHome />
           </Link>
         </div>
         <div>
           {session ? (
             <Button className={buttonVariants()} onClick={() => signOut()}>
-              Sign Out
+              Sair
             </Button>
           ) : (
             <Button className={buttonVariants()} onClick={() => router.push("/auth/sign-in")}>
-              Sign In
+              Entrar
             </Button>
           )
           }
