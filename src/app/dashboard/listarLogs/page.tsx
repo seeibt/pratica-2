@@ -47,13 +47,13 @@ export default async function ListLogs() {
                                         {log?.grausTemp != null ? log.grausTemp.toString() : ''}°C
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime()).toLocaleString("pt-BR") : ''}
+                                        {log?.horarioTemperatura != null ? new Date(new Date(log.horarioTemperatura).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime()).toLocaleString("pt-BR") : ''}
+                                        {log?.horarioAerador != null ? new Date(new Date(log.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime()).toLocaleString("pt-BR") : ''}
+                                        {log?.horarioTratador != null ? new Date(new Date(log.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString("pt-BR") : ''}
                                     </td>
                                 </tr>
                             ))}

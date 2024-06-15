@@ -68,11 +68,11 @@ const Admin = async () => {
         </p>
         <p>
           Última vez que o Aerador foi ligado:{' '}
-          <b>{new Date(new Date(firstLog.horarioAerador).getTime()).toLocaleString('pt-BR')}</b>
+          <b>{new Date(new Date(firstLog.horarioAerador).getTime() - 3 * 60 * 60 * 1000).toLocaleString('pt-BR')}</b>
         </p>
         <p>
           Última vez que o Tratador foi ligado:{' '}
-          <b>{new Date(new Date(firstLog.horarioTratador).getTime()).toLocaleString('pt-BR')}</b>
+          <b>{new Date(new Date(firstLog.horarioTratador).getTime() - 3 * 60 * 60 * 1000).toLocaleString('pt-BR')}</b>
         </p>
         <div className="text-center p-5">
           <Link href="/dashboard/listarLogs" className="text-md text-blue-400 hover:underline">
